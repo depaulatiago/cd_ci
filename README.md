@@ -1,6 +1,6 @@
-# Exemplo simples de CI/CD com GitHub Actions
+# Exemplo simples de CI com GitHub Actions
 
-Demo mínimo mostrando um pipeline de CI/CD em Python.
+Demo mínimo mostrando um pipeline de CI em Python.
 
 ## Estrutura
 
@@ -10,21 +10,15 @@ Demo mínimo mostrando um pipeline de CI/CD em Python.
 
 ## Como funciona o pipeline
 
-O arquivo [.github/workflows/ci-cd.yml](.github/workflows/ci-cd.yml) tem dois jobs:
+O arquivo [.github/workflows/ci-cd.yml](.github/workflows/ci-cd.yml) tem
+um job `test` que roda em todo `push` e `pull_request` para `main`:
 
-1. **CI (`test`)** — roda em todo `push` e `pull_request` para `main`:
-   - Faz checkout do código
-   - Instala Python 3.12
-   - Instala `pytest`
-   - Roda os testes
+- Faz checkout do código
+- Instala Python 3.12
+- Instala `pytest`
+- Roda os testes
 
-2. **CD (`deploy`)** — só roda se:
-   - O job `test` passou (`needs: test`)
-   - O push foi para a branch `main` (`if: github.ref == 'refs/heads/main'`)
-
-   Aqui o deploy é simulado com um `echo`. Em um caso real, esse passo
-   poderia publicar em um servidor, fazer push para o GitHub Pages,
-   subir um container, etc.
+Se algum teste falhar, o pipeline fica vermelho.
 
 ## Rodar localmente
 

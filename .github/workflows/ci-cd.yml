@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 
 on:
   push:
@@ -22,14 +22,3 @@ jobs:
 
       - name: Rodar testes
         run: pytest
-
-  deploy:
-    name: CD - Deploy
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Deploy (simulado)
-        run: echo "Deploy feito! Versao $GITHUB_SHA"
